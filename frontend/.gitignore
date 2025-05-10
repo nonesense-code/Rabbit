@@ -1,6 +1,10 @@
 # Logs
 logs
+# dotenv environment variables
 .env
+.env.local
+.env.*.local
+
 *.log
 npm-debug.log*
 yarn-debug.log*
