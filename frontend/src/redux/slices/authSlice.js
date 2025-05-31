@@ -24,7 +24,6 @@ export const deleteUser = createAsyncThunk(
   "auth/deleteUser",
   async (userId, { rejectWithValue }) => {
     try {
-      console.log(userId);
       const response = await axios({
         method: "DELETE",
         url: `${import.meta.env.VITE_BACKEND_URL}/users/delete`,
@@ -86,7 +85,6 @@ export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (userData, { rejectWithValue }) => {
     try {
-      console.log(userData);
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/users/register`,
         userData

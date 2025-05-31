@@ -17,7 +17,6 @@ export const fetchProductByFilters = createAsyncThunk(
     brand,
     limit,
   }) => {
-    console.log("The searched value is:", search);
     const query = new URLSearchParams();
     if (collection) query.append("collection", collection);
     if (size) query.append("size", size);
@@ -35,7 +34,6 @@ export const fetchProductByFilters = createAsyncThunk(
     const response = await axios.get(
       `${import.meta.env.VITE_BACKEND_URL}/products?${query.toString()}`
     );
-    console.log(response.data);
     return response.data;
   }
 );

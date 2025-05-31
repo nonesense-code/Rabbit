@@ -12,7 +12,7 @@ const orders = [
 ];
 
 const handleStatusChange = (orderID, status) => {
-  console.log({ orderID, status });
+  // console.log({ orderID, status });
 };
 
 const OrderManagement = () => {

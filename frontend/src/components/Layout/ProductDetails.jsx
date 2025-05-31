@@ -98,7 +98,6 @@ const selectedProductDetails = ({ productId }) => {
                       src={image.url}
                       alt={image.altText || "Product Image"}
                       onClick={() => {
-                        console.log("Updating activeImage:", image.url);
                         setActiveImage({
                           imageURL: image.url,
                           altText: image.altText,

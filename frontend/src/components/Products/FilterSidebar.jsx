@@ -14,7 +14,6 @@ const FilterSidebar = () => {
     minPrice: 0,
     maxPrice: 100,
   });
-  // console.log(filters);
   const [priceRange, setPriceRange] = useState([0, 100]);
   const category = ["Top Wear", "Bottom Wear"];
   const colors = [
@@ -87,7 +86,6 @@ const FilterSidebar = () => {
 
     */
     const params = Object.fromEntries([...searchParams]);
-    // console.log(params);
 
     setFilters({
       category: params.category || "",

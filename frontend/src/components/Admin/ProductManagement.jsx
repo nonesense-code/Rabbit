@@ -30,7 +30,6 @@ const products = [
 
 const handleDelete = (id) => {
   if (window.confirm("Are you sure you want to delete this product?"))
-    console.log(id);
 };
 
 const ProductManagement = () => {
