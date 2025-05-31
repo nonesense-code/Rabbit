@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
-const databaseConnection = require("./models/db");
 const app = express();
+const databaseConnection = require("./models/db");
 const cors = require("cors");
 
 const Home = require("./routes/Home");
@@ -9,7 +9,9 @@ const userRouter = require("./routes/UserRouter");
 const productRouter = require("./routes/ProductRouter");
 const cartRouter = require("./routes/CartRouter");
 
-app.use(cors());
+const frontendURL = process.env.FRONTEND_URL;
+
+app.use(cors(frontendURL));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
