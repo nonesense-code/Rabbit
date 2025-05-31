@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "rabbit-server",
   "main": "index.js",
   "dependencies": {
     "abbrev": "^1.1.1",
@@ -179,9 +178,10 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "kaushal",
-  "license": "ISC"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
