@@ -1,36 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-const products = [
-  {
-    _id: 123,
-    name: "Shirt",
-    price: 110,
-    sku: "122333",
-  },
-  {
-    _id: 1343,
-    name: "Shirt",
-    price: 110,
-    sku: "122333",
-  },
-  {
-    _id: 155223,
-    name: "Shirt",
-    price: 110,
-    sku: "122333",
-  },
-  {
-    _id: 15234523,
-    name: "Shirt",
-    price: 110,
-    sku: "122333",
-  },
-];
+import {useSelector, useDispatch} from "react-redux";
 
 const handleDelete = (id) => {
-  if (window.confirm("Are you sure you want to delete this product?"))
+  let x = window.confirm("Are you sure you want to delete this product?");
+  if(x){
+    console.log("Delete product");
+  }
 };
+
+const products = useSelector((state)=> state.product);
 
 const ProductManagement = () => {
   return (
