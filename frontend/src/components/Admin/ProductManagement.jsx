@@ -28,7 +28,9 @@ const products = [
   },
 ];
 
-const handleDelete = (id) => {};
+const handleDelete = (id) => {
+  console.log("Delete product with id: ", id);
+};
 
 const ProductManagement = () => {
   return (
