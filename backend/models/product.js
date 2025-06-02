@@ -17,15 +17,11 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     price: {
-      default: function () {
-        return this.originalPrice;
-      },
-      // if the price is given it value is assigned and if not given the price value will be same as the originalPrice
       type: Number,
+      required: true,
     },
     color: {
       type: [],
-      required: true,
     },
     rating: {
       type: Number,
@@ -33,23 +29,18 @@ const productSchema = new mongoose.Schema(
     },
     size: {
       type: [],
-      required: true,
     },
     material: {
       type: [],
-      required: true,
     },
     brand: {
       type: [],
-      required: true,
     },
     gender: {
       type: String,
-      required: true,
     },
     category: {
       type: String,
-      required: true,
     },
     tags: [String],
     isFeatured: {

@@ -1,5 +1,7 @@
-import React from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProducts } from "../redux/slices/adminSlice";
 
 const orders = [
   {
@@ -35,7 +37,14 @@ const orders = [
     status: "Processing",
   },
 ];
+
 const AdminHomePage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+  const totalProducts = useSelector((state) => state.admin.totalProducts);
   return (
     <>
       <div className="max-w-7xl mx-auto p-6">
@@ -47,14 +56,14 @@ const AdminHomePage = () => {
           </div>
           <div className="p-4 shadow-md rounded-lg">
             <h2 className="text-xl font-semibold">Total Orders</h2>
-            <p className="text-2xl">$12</p>
+            <p className="text-2xl">12</p>
             <Link to="/admin/orders" className="text-blue-500 hover:underline">
               Manage Orders
             </Link>
           </div>
           <div className="p-4 shadow-md rounded-lg">
-            <h2 className="text-xl font-semibold"></h2>
-            <p className="text-2xl">122</p>
+            <h2 className="text-xl font-semibold">Total Products</h2>
+            <p className="text-2xl">{totalProducts}</p>
             <Link
               to="/admin/products"
               className="text-blue-500 hover:underline"
@@ -77,9 +86,9 @@ const AdminHomePage = () => {
               </thead>
               <tbody>
                 {orders.length > 0 ? (
-                  orders.map((order) => (
+                  orders.map((order, index) => (
                     <tr
-                      key={order._id}
+                      key={index}
                       className="border-b hover:bg-gray-50 cursor-pointer"
                     >
                       <td className="p-4">{order._id}</td>

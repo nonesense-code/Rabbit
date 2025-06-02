@@ -25,6 +25,7 @@ router.get("/api", protect, admin, async (req, res) => {
   }
 });
 
+
 // @users/update-role/:id
 // @update the user role
 router.put("/update-role", protect, admin, async (req, res) => {

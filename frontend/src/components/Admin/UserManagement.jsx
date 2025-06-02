@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   registerUser,
@@ -35,6 +35,8 @@ const UserManagement = () => {
   const { user, guestId, allUserData, userRoleData } = useSelector(
     (state) => state.auth
   );
+
+  const users = useSelector((state) => state.admin.allUsersData);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -141,7 +143,7 @@ const UserManagement = () => {
             </tr>
           </thead>
           <tbody>
-            {allUserData.map((user) => (
+            {users.map((user) => (
               <tr key={user._id} className="border-b hover:bg-gray-50">
                 <td className="p-4 font-medium text-gray-900 whitespace-nowrap">
                   {user.name}

@@ -1,38 +1,20 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-const products = [
-  {
-    _id: 123,
-    name: "Shirt",
-    price: 110,
-    sku: "122333",
-  },
-  {
-    _id: 1343,
-    name: "Shirt",
-    price: 110,
-    sku: "122333",
-  },
-  {
-    _id: 155223,
-    name: "Shirt",
-    price: 110,
-    sku: "122333",
-  },
-  {
-    _id: 15234523,
-    name: "Shirt",
-    price: 110,
-    sku: "122333",
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../../redux/slices/adminSlice";
 
 const handleDelete = (id) => {
   console.log("Delete product with id: ", id);
 };
 
 const ProductManagement = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+
+  const products = useSelector((state) => state.admin.allProductsData);
+
   return (
     <>
       <div className="max-w-7xl mx-auto p-6">
@@ -59,7 +41,7 @@ const ProductManagement = () => {
                     <td className="p-4">{product.sku}</td>
                     <td className="p-4">
                       <Link
-                        to={`/admin/products/${product._id}/edit`}
+                        to={`/admin/products/edit/${product._id}`}
                         className="bg-yellow-500 text-white px-2 py-1 rounded mr-2 hover:bg-yellow-600"
                       >
                         Edit
