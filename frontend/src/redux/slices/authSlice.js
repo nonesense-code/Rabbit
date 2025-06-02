@@ -2,18 +2,26 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const userFromStorage = localStorage.getItem("userInfo")
-  ? localStorage.getItem("userInfo")
+  ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
 const initialGuestId =
   localStorage.getItem("guestId") || `guest_${new Date().getTime()}`;
 localStorage.setItem("guestId", initialGuestId);
 
+function checkIsAdmin() {
+  const isAdmin = localStorage.getItem("userInfo")
+    ? JSON.parse(localStorage.getItem("userInfo")).role === "admin"
+    : false;
+  return isAdmin;
+}
+
 // Initial State
 const initialState = {
   user: userFromStorage,
   guestId: initialGuestId,
   userRoleData: null,
+  isAdmin: checkIsAdmin(),
   allUserData: [],
   loading: false,
   error: null,
@@ -101,14 +109,14 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    logout: (state, action) => {
+    logout: (state) => {
       state.user = null;
       state.guestId = `guest_${new Date().getTime()}`;
       localStorage.removeItem("userInfo");
       localStorage.removeItem("userToken");
       localStorage.setItem("guestId", state.guestId);
     },
-    generateNewGuestId: (state, action) => {
+    generateNewGuestId: (state) => {
       state.guestId = `guest_${new Date().getTime()}`;
       localStorage.setItem("guestId", state.guestId);
     },
@@ -125,7 +133,7 @@ const authSlice = createSlice({
       })
       .addCase(deleteUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload; 
+        state.error = action.payload;
       })
       .addCase(userRole.pending, (state) => {
         state.loading = true;
@@ -145,6 +153,7 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.loading = false;
+        state.isAdmin = action.payload.role === "admin";
         state.user = action.payload;
       })
       .addCase(loginUser.rejected, (state, action) => {

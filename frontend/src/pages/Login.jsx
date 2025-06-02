@@ -3,21 +3,26 @@ import { Link } from "react-router-dom";
 import { loginUser } from "../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.auth);
 
-  // if (user) {
-  //   navigate("/");
-  // }
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginUser({ email, password }));
+    try {
+      const resultAction = await dispatch(
+        loginUser({ email, password })
+      ).unwrap();
+      if (resultAction) {
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error("Invalid email or password!");
+    }
   };
 
   return (

@@ -8,7 +8,7 @@ const {
   userLoginController,
   userProfileController,
 } = require("../controllers/userController");
-
+  
 // @/users/api
 // @desc fetch all the userAccounts
 router.get("/api", protect, admin, async (req, res) => {

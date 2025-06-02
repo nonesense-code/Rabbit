@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router";
 import {
@@ -10,6 +10,7 @@ import SearchBar from "./SearchBar";
 import CartDrawer from "../Layout/CartDrawer";
 import { IoMdClose } from "react-icons/io";
 import { useSelector } from "react-redux";
+import { MdLogin } from "react-icons/md";
 
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -27,6 +28,10 @@ const Navbar = () => {
   const toggleNavDrawer = () => {
     setNavDrawerOpen(!navDrawerOpen);
   };
+
+  const isAdmin = useSelector((state) => state.auth.isAdmin);
+  const userInfo = useSelector((state) => state.auth.user);
+
   return (
     <>
       <nav className="container mx-auto flex items-center justify-center py-2 px-6">
@@ -65,15 +70,27 @@ const Navbar = () => {
           </div>
           {/* Icons */}
           <div className="flex items-center space-x-4">
-            <Link
-              className="uppercase rounded-lg text-sm bg-black text-white px-2 py-1 tracking-wide"
-              to="/admin"
-            >
-              Admin
-            </Link>
-            <Link to="/profile" className="hover:text-black">
-              <HiOutlineUser className="h-6 w-6 text-gray-700" />
-            </Link>
+            {isAdmin && (
+              <Link
+                className="uppercase rounded-lg text-sm bg-black text-white px-2 py-1 tracking-wide"
+                to="/admin"
+              >
+                Admin
+              </Link>
+            )}
+            {!userInfo ? (
+              <Link
+                to="/login"
+                className="hover:bg-sky-600 hover:text-white hover:border-gray-600 transition-colors duration-400 ease-in flex items-center gap-1 justify-center border-2 p-1 rounded-md"
+              >
+                <MdLogin className="h-6 w-6 text-gray-700" />
+                <p className="text-sm font-medium rounded-md">Log In</p>
+              </Link>
+            ) : (
+              <Link to="/profile" className="hover:text-black">
+                <HiOutlineUser className="h-6 w-6 text-gray-700" />
+              </Link>
+            )}
 
             <button
               onClick={toggleCartDrawer}
